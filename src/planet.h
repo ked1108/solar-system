@@ -1,41 +1,21 @@
 //
-// Created by kedar on 7/4/24.
+// Created by kedar on 7/7/2024.
 //
 
-#ifndef PLANET_H
-#define PLANET_H
+#ifndef SOLAR_SYSTEM_PLANET_H
+#define SOLAR_SYSTEM_PLANET_H
 
-#include <array>
-#include <vector>
+#include <memory>
 
 #include "raylib.h"
+#include "body.h"
 
-#define AU (149.6e6 * 1000)
-#define G 6.67428e-11
-#define TIMESTEP (60 * 60 * 24 * 2)
-#define SCALE (200 / AU)
+class Planet : Body {
+    std::shared_ptr<Body> star;
 
-#define ORBIT_LENGTH 100
-
-class Planet {
-    Vector3 pos;
-    Vector3 vel;
-    float radius;
-    float mass;
-    std::array<Vector3, ORBIT_LENGTH> orbit;
-
-    Color color;
 public:
-    Planet(Vector3 pos, float radius, Color color, float mass);
-    void update_pos(const std::vector<Planet>& planets);
-    Vector3 calculate_forces(Planet& p2);
-    Vector3 attraction(Planet& p2) const;
-
-    Vector3 get_pos() const;
-    float get_radius() const;
-    Color get_color() const;
+    Planet(std::string name, Vector3 pos, float radius, Color color, float mass, std::shared_ptr<Body> star);
 };
 
 
-
-#endif //PLANET_H
+#endif //SOLAR_SYSTEM_PLANET_H

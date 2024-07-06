@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
-#include "planet.h"
+#include "body.h"
 #include "raylib.h"
 
 TEST(PlanetTest, Get) {
-    Planet p({0, 0, 0}, 10.0f, RED, 10);
+    Body p({0, 0, 0}, 10.0f, RED, 10);
     // EXPECT_EQ(p.get_color(), (RED));
     EXPECT_EQ(p.get_pos().x, 0.0f);
     EXPECT_EQ(p.get_pos().y, 0.0f);

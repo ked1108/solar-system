@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "body.h"
 #include "planet.h"
 
 const int screenWidth = 1080;
@@ -16,9 +17,7 @@ int main() {
     camera.projection = CAMERA_PERSPECTIVE;
     DisableCursor();
 
-
-    Planet Sun({0.0f, 0.0f, 0.0f}, 1.5f, YELLOW, 10);
-    Planet Earth({5.0f, 0.0f, 5.0f}, 0.5f, BLUE, 5);
+    std::vector<Planet> planets;
 
     while (!WindowShouldClose())        // Detect window close button or ESC key
     {
