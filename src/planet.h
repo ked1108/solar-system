@@ -29,7 +29,11 @@ public:
     Planet(Vector3 pos, float radius, Color color, float mass);
     void update_pos(const std::vector<Planet>& planets);
     Vector3 calculate_forces(Planet& p2);
-    Vector3 attraction(Planet& p2);
+    Vector3 attraction(Planet& p2) const;
+
+    Vector3 get_pos() const;
+    float get_radius() const;
+    Color get_color() const;
 };
 
 

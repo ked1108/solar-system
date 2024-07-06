@@ -14,9 +14,26 @@ Planet::Planet(Vector3 pos, float radius, Color color, float mass) {
     this->color = color;
 
     this->mass = mass;
+
+    this->orbit = {};
+    this->vel = {0,0};
 }
 
-Vector3 Planet::attraction(Planet &p2) {
+Vector3 Planet::get_pos() const {
+    return this->pos;
+}
+
+float Planet::get_radius() const {
+    return this->radius;
+}
+
+Color Planet::get_color() const {
+    return this->color;
+}
+
+
+
+Vector3 Planet::attraction(Planet &p2) const {
     float distance_sqr = Vector3DistanceSqr(this->pos, p2.pos);
     if(distance_sqr == 0) return (Vector3){0.0f, 0.0f, 0.0f};
 
