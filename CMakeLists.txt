@@ -7,9 +7,11 @@ enable_testing()
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
+include(AddJsonCpp)
+
 add_subdirectory(src)
 
 add_executable(solar_system main.cpp)
-target_link_libraries(solar_system raylib system)
+target_link_libraries(solar_system raylib jsoncpp_static system)
 
 add_subdirectory(test)

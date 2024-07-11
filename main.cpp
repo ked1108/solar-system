@@ -2,7 +2,7 @@
 #include "body.h"
 #include "planet.h"
 
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 #include <fstream>
 
 const int screenWidth = 1080;
@@ -83,7 +83,7 @@ void loadPlanets() {
     planets_file >> planets_root;
 
     for(auto planet: planets_root) {
-        planets.push_back(Planet(planet["name"], ));
+        planets.push_back(Planet(planet["name"] ));
     }
 
 }
