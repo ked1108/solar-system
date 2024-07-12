@@ -10,7 +10,7 @@
 #include "raylib.h"
 #include "body.h"
 
-class Planet : Body {
+class Planet : public Body {
     std::shared_ptr<Body> star;
 
 public:

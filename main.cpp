@@ -9,6 +9,8 @@ const int screenWidth = 1080;
 const int screenHeight = 720;
 
 std::vector<Planet> planets;
+std::shared_ptr<Body> Sun(new Body("Sun", (Vector3) {0, 0, 0},
+                                   109 * SCALE, YELLOW, 333000));
 
 void loadPlanets();
 
@@ -24,9 +26,7 @@ int main() {
     camera.projection = CAMERA_PERSPECTIVE;
     DisableCursor();
 
-    Body Sun("Sun", (Vector3){0, 0, 0}, 109*SCALE, YELLOW, 333000);
-
-    
+    loadPlanets();
 
     while (!WindowShouldClose())        // Detect window close button or ESC key
     {
@@ -50,7 +50,13 @@ int main() {
 
         BeginMode3D(camera);
 
+        DrawSphere(Sun->get_pos(), Sun->get_radius(), Sun->get_color());
 
+        DrawGrid(10, 1.0f);
+
+        for(Planet planet: planets) {
+            DrawSphere(planet.get_pos(), planet.get_radius(), planet.get_color());
+        }
 
         DrawGrid(10, 1.0f);
 
@@ -78,12 +84,17 @@ int main() {
 }
 
 void loadPlanets() {
-    std::ifstream planets_file("../planets.json", std::ifstream::binary);
+    std::ifstream planets_file("../data/planets.json", std::ifstream::binary);
     Json::Value planets_root;
     planets_file >> planets_root;
 
-    for(auto planet: planets_root) {
-        planets.push_back(Planet(planet["name"] ));
+    for(Json::Value::ArrayIndex i = 0; i != planets_root.size(); i++) {
+        planets.emplace_back(planets_root[i]["name"].asString(),
+                             (Vector3){static_cast<float>(planets_root[i]["semi_major_axis"].asFloat()), 0, 0},
+                             planets_root[i]["equatorial_diameter"].asFloat()/2.0f,
+                             RED,
+                             planets_root[i]["mass"].asFloat(),
+                             Sun);
     }
 
 }
