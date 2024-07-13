@@ -5,6 +5,8 @@
 #include <json/json.h>
 #include <fstream>
 
+#include <iostream>
+
 const int screenWidth = 1080;
 const int screenHeight = 720;
 
@@ -19,7 +21,7 @@ int main() {
     SetTargetFPS(60);
 
     Camera3D camera = { 0 };
-    camera.position = (Vector3){ 1000.0f, 1000.0f, 1000.0f }; // Camera position
+    camera.position = (Vector3){ -7.0f, 5.0f, -7.0f }; // Camera position
     camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
     camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
@@ -50,15 +52,15 @@ int main() {
 
         BeginMode3D(camera);
 
+        // std::cout << Sun->get_radius() <<", " << ColorToInt(Sun->get_color()) << std::endl;
         DrawSphere(Sun->get_pos(), Sun->get_radius(), Sun->get_color());
 
         DrawGrid(10, 1.0f);
 
-        for(Planet planet: planets) {
+        for(Planet planet: planets)
             DrawSphere(planet.get_pos(), planet.get_radius(), planet.get_color());
-        }
 
-        DrawGrid(10, 1.0f);
+        // DrawGrid(10, 1.0f);
 
         EndMode3D();
 

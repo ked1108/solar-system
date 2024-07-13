@@ -14,7 +14,7 @@
 #define AU (149.6e6 * 1000)
 #define G 6.67428e-11
 #define TIMESTEP (60 * 60 * 24 * 2)
-#define SCALE (200 / AU)
+#define SCALE 1/100.0f
 
 #define ORBIT_LENGTH 100
 
